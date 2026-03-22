@@ -2,10 +2,8 @@ Project is ongoing
 
 
 PO adatok elemzése – 5 éves visszatekintés
-Az alábbiakban egy strukturált áttekintést adok arról, milyen elemzések végezhetők el és milyen kérdések válaszolhatók meg purchase order adatokból, ha 5 éves historikus adat áll rendelkezésre.
 
 1. Spend analitika
-Kérdések:
 
 Mekkora volt az összes kiadás évente, kategóriánként, szállítónként?
 Hol koncentrálódik a spend (Pareto: általában a szállítók 20%-a adja a kiadások 80%-át)?
@@ -14,7 +12,6 @@ Milyen a kategóriánkénti kiadás trendje – növekszik vagy csökken?
 Eredmény: Spend kategorizáció (direkt vs. indirekt), maverick spend azonosítása (nem jóváhagyott szállítókon keresztüli vásárlások aránya).
 
 2. Szállítóbázis elemzés
-Kérdések:
 
 Hány aktív szállítónk van évente? Hogyan változott ez 5 év alatt?
 Melyik szállítónál van a legnagyobb koncentrációs kockázat (single source)?
@@ -24,7 +21,6 @@ Mely szállítók estek ki, és miért?
 Példa mutatószám: Ha 5 év alatt a szállítók száma nőtt, de a spend koncentrálódott, az rationalizálási lehetőséget jelez.
 
 3. Árelemzés és inflációkövetés
-Kérdések:
 
 Hogyan változott egy adott cikk vagy szolgáltatás egységára 5 év alatt?
 A piaci inflációhoz (pl. PPI index) képest hogyan teljesítettünk?
@@ -33,7 +29,6 @@ Van-e szállítónként eltérő árazás ugyanarra a termékre (price variance)
 Eredmény: Azonosíthatók azok a kategóriák, ahol az áremelkedés felülmúlta a piacit; ezek tárgyalási prioritást kapnak.
 
 4. Szerződésmegfelelőség (Compliance)
-Kérdések:
 
 A PO-k hány %-a megy keretszerződéses szállítóhoz?
 Mekkora a maverick buying aránya kategóriánként?
@@ -42,7 +37,6 @@ Vannak-e rendszeresen szerződés nélkül feladott rendelések?
 Mutatószám: Iparági benchmark szerint az 15% feletti maverick spend komoly megtakarítási potenciált rejt.
 
 5. Rendelési magatartás elemzése
-Kérdések:
 
 Mekkora az átlagos PO érték? Trend van-e benne?
 Hány kis értékű PO van (pl. 500 EUR alatti)? Ezek feldolgozási költsége aránytalanul magas.
@@ -52,7 +46,6 @@ Milyen a PO-nkénti átlagos lead time szállítónként?
 Példa: Ha az összes PO 40%-a 300 EUR alatti értékű, a tranzakciós költség (becslés: 50-150 EUR/PO) eliminálása p-card vagy catalog megoldással azonnal megtakarítást hoz.
 
 6. Kategória-stratégia megalapozása
-Kérdések:
 
 Melyik kategóriában van a legtöbb szállító (fragmentált piac)?
 Hol volt a legtöbb egyedi, egyszeri vásárlás?
@@ -61,10 +54,11 @@ Mely kategóriákban csökkent a spend anélkül, hogy azt tudatos döntés okoz
 Eredmény: Prioritizált kategóriák azonosítása sourcing projektekhez.
 
 7. Megtakarítási potenciál becslése
-Elemzés típusaTipikus megtakarítási potenciálSzállítókonszolidáció5-15% az érintett kategoriánMaverick spend visszaterelés10-20%Kis értékű PO-k eliminálásaTranzakciós költség 30-50%-aÚjratárgyalás áradat alapján3-8%
+
+Elemzés típusa
+Tipikus megtakarítási potenciálSzállítókonszolidáció5-15% az érintett kategoriánMaverick spend visszaterelés10-20%Kis értékű PO-k eliminálásaTranzakciós költség 30-50%-aÚjratárgyalás áradat alapján3-8%
 
 8. Kockázatelemzés
-Kérdések:
 
 Melyik szállítótól függ a működés kritikusan (high spend + single source)?
 Vannak-e szállítók, akiknél a PO-k száma csökkent, de az egységár nőtt?
