@@ -10,6 +10,14 @@ CREATE TABLE incoterms (
     CONSTRAINT pk_incoterms PRIMARY KEY (IncoTerms)
 );
 
+CREATE TABLE categories (
+    Main_category           VARCHAR(255)     NOT NULL,
+    L2_code         VARCHAR(255) NOT NULL,
+    Secondary_category  VARCHAR(255),
+    Description  VARCHAR(255),
+    CONSTRAINT pk_categories PRIMARY KEY (L2_code)
+);
+
 CREATE TABLE all_suppliers (
     Centrally_imposed_purchasing_block  VARCHAR(50),
     Purchasing_block_at_purchasing      VARCHAR(50),
@@ -18,7 +26,7 @@ CREATE TABLE all_suppliers (
     Central_posting_block               VARCHAR(50),
     B                                   VARCHAR(50),
     Indus                               VARCHAR(10),
-    Vendor_code                         VARCHAR(50)     NOT NULL,
+    Vendor_number                       VARCHAR(50)     NOT NULL,
     Grp                                 VARCHAR(20),
     Language                            VARCHAR(5),
     DUNS_Nummer                         VARCHAR(20),
@@ -46,7 +54,7 @@ CREATE TABLE all_suppliers (
     Created_on                          DATE,
     In_dir                              VARCHAR(30),
     Act                                 VARCHAR(30),
-    CONSTRAINT pk_all_suppliers         PRIMARY KEY (Vendor_code),
+    CONSTRAINT pk_all_suppliers         PRIMARY KEY (Vendor_number),
     CONSTRAINT fk_all_sup_payment       FOREIGN KEY (PayT)
         REFERENCES payment_terms (PayTerms),
     CONSTRAINT fk_all_sup_incoterms     FOREIGN KEY (IncoT)
@@ -63,18 +71,16 @@ CREATE TABLE orders (
     Unit_of_Measure                     VARCHAR(10),
     Purchasing_Group                    VARCHAR(10),
     Requisitioner                       VARCHAR(50),
-    Desired_Vendor                      VARCHAR(20),
     Purch_Organization                  VARCHAR(10),
     Requisition_Date                    DATE,
     Release_Date                        DATE,
     Purchase_Order_Date                 DATE,
     Delivery_Date                       VARCHAR(20),
-    PR_Processing_State                 VARCHAR(5),
-    Release_Indicator                   VARCHAR(5),
-    Processing_Status                   VARCHAR(5),
-    Vendor                              VARCHAR(20),
+    PR_Processing_State                 VARCHAR(20),
+    Release_Indicator                   VARCHAR(20),
     Total_Value                         NUMERIC(18,2),
-    Currency                            VARCHAR(5),
+    Currency                            VARCHAR(20),
+    Euro_total                          NUMERIC(18,2),
     Document_Type                       VARCHAR(10),
     Release_Strategy                    VARCHAR(10),
     Created_by                          VARCHAR(20),
@@ -82,21 +88,24 @@ CREATE TABLE orders (
     Release_Group                       VARCHAR(10),
     Vendor_Name                         VARCHAR(100),
     Plant                               VARCHAR(10),
-    GR_Processing_Time                  INT,
-    Fixed_Vendor                        VARCHAR(20),
-    Invoice_Receipt                     VARCHAR(5),
-    GR_Non_Valuated                     VARCHAR(5),
-    Goods_Receipt                       VARCHAR(5),
+    Vendor_number                       VARCHAR(50),
+    Invoice_Receipt                     VARCHAR(20),
+    GR_Non_Valuated                     VARCHAR(20),
+    Goods_Receipt                       VARCHAR(20),
     Planned_Deliv_Time                  INT,
     Deliv_Date_From_To                  DATE,
-    Creation_Indicator                  VARCHAR(5),
+    Creation_Indicator                  VARCHAR(20),
     Material_Group                      VARCHAR(10),
-    Deliv_Date_Category                 VARCHAR(5),
+    Deliv_Date_Category                 VARCHAR(20),
     Changed_on                          DATE,
+    Material_code                       VARCHAR(255),
     CONSTRAINT pk_orders                PRIMARY KEY (Purchase_Order, Purchase_Requisition, Item_of_Requisition),
-    CONSTRAINT fk_orders_all_suppliers  FOREIGN KEY (Fixed_Vendor)
-        REFERENCES all_suppliers (Vendor_code)
+    CONSTRAINT fk_orders_all_suppliers  FOREIGN KEY (Vendor_number)
+        REFERENCES all_suppliers (Vendor_number),
+    CONSTRAINT fk_categories            FOREIGN KEY (Material_code)
+        REFERENCES categories (L2_code)
 );
+
 
 
 COPY payment_terms
@@ -107,6 +116,10 @@ COPY incoterms
 FROM 'C:\Users\laszl\Desktop\Projects\Historical analytics\csv_files\incoterms.csv'
 DELIMITER ';' CSV HEADER;
 
+COPY categories
+FROM 'C:\Users\laszl\Desktop\Projects\Historical analytics\csv_files\categories.csv'
+DELIMITER ';' CSV HEADER;
+
 COPY all_suppliers
 FROM 'C:\Users\laszl\Desktop\Projects\Historical analytics\csv_files\all_suppliers.csv'
 DELIMITER ';' CSV HEADER;
@@ -115,22 +128,11 @@ COPY orders
 FROM 'C:\Users\laszl\Desktop\Projects\Historical analytics\csv_files\orders.csv'
 DELIMITER ';' CSV HEADER;
 
-
 drop  TABLE orders;
 DROP TABLE all_suppliers;
 DROP TABLE payment_terms;
 DROP TABLE incoterms;
+DROP TABLE categories;
 
-ALTER TABLE orders
-DROP CONSTRAINT fk_orders_all_suppliers;
-
-ALTER TABLE orders
-ADD CONSTRAINT fk_orders_all_suppliers
-    FOREIGN KEY (Fixed_Vendor)
-    REFERENCES all_suppliers (Vendor_code)
-    NOT VALID;
-
-ALTER TABLE orders
-VALIDATE CONSTRAINT fk_orders_all_suppliers;
 
 
