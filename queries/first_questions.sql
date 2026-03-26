@@ -10,7 +10,7 @@ Milyen a kategóriánkénti kiadás trendje – növekszik vagy csökken?
 
 --Évente kiadás
 SELECT
-    sum(eur_amount) as total,
+    sum(euro_total) as total,
     EXTRACT(YEAR FROM purchase_order_date) as year
 FROM orders
 GROUP BY year
@@ -19,7 +19,7 @@ ORDER BY year DESC
 --Szállítónkénti kiadás
 SELECT
     vendor_name,
-    sum(eur_amount) as total
+    sum(euro_total) as total
 FROM orders
 GROUP BY vendor_name
 ORDER BY total DESC
@@ -30,3 +30,26 @@ Select
     purchasing_group
 from orders
 group by purchasing_group
+
+--Material csoportonkénti megoszlás
+SELECT
+    secondary_category,
+    sum(euro_total) as total
+FROM orders
+Left join categories ON material_code = l2_code
+GROUP BY secondary_category
+ORDER BY total DESC
+
+--asd
+With total as(
+select
+    sum(euro_total) as total
+From orders
+), percentage_orders as (
+    secondary_category,
+    sum(euro_total) as total
+FROM orders
+Left join categories ON material_code = l2_code
+GROUP BY secondary_category
+ORDER BY total DESC
+)
